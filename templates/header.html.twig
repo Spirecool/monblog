@@ -19,9 +19,14 @@
 		</ul>
 
 		<div class="col-md-3 text-end">
-			<a href="{{ path('app_login') }}" class="btn btn-outline-primary me-2">Se connecter</a>
-			<a href="{{ path('app_login') }}" class="btn btn-primary">S'enregistrer</a>
-
+			{% if app.user %}
+				<!-- Si l'utilisateur est connecté, afficher le bouton de déconnexion -->
+				<a href="{{ path('app_logout') }}" class="btn btn-danger">Se déconnecter</a>
+			{% else %}
+				<!-- Si l'utilisateur n'est pas connecté, afficher les boutons S'inscrire et Se connecter -->
+				<a href="{{ path('app_register') }}" class="btn btn-primary">S'inscrire</a>
+				<a href="{{ path('app_login') }}" class="btn btn-secondary">Se connecter</a>
+			{% endif %}
 		</div>
 	</header>
 </header>
