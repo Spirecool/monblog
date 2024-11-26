@@ -1,0 +1,26 @@
+/* Assurez-vous que le body et html occupent toute la hauteur de la page */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Conteneur wrapper pour prendre toute la hauteur de la page */
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenu principal de la page */
+.container {
+    flex: 1; /* Prendre tout l'espace restant */
+    padding: 20px; /* Ajouter de l'espace autour du contenu */
+}
+
+/* Le footer est positionné en bas grâce à flexbox */
+footer {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Pousse le footer vers le bas */
+}
