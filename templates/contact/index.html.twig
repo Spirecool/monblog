@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Contactez-nous
+{% endblock %}
+
+{% block body %}
+
+
+<h1 class="text-center">Contactez-nous</h1>
+
+<div class="container mt-5">
+	<div
+		class="row">
+
+		<!-- Formulaire de contact - Première colonne -->
+		<div class="col-md-6">
+        {# Affichage des messages flash #}
+                {% for label, messages in app.flashes %}
+                    <div class="alert alert-{{ label }} mt-3">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+			{{ form_start(form)}}
+                <div class="mb-3">
+					{{ form_row(form.subject)}}
+				</div>
+				<div class="mb-3">
+					{{ form_row(form.firstName)}}
+				</div>
+				<div class="mb-3">
+					{{ form_row(form.lastName)}}
+				</div>
+				<div class="mb-3">
+					{{ form_row(form.email)}}
+				</div>	
+                <div class="mb-3">
+					{{ form_row(form.message)}}
+				</div>
+                <div class="mb-3">
+					<input type="submit" class="btn btn-primary">
+				</div>
+
+            {{ form_end(form)}}
+
+		</div>
+
+		<!-- Informations de contact - Deuxième colonne -->
+		<div class="col-md-6 d-flex justify-content-center align-items-center">
+			<div class="card bg-light border p-4">
+
+				<p>
+					<strong>Adresse :</strong>
+					{{contact_address}}
+				</p>
+				<p>
+					<strong>Téléphone :</strong>
+					{{contact_phone}}
+				</p>
+				<p>
+					<strong>Email :</strong>
+					<a href="mailto:contact@monblog.fr" </a> {{contact_email}} </p> </div> </div> </div> </div> {% endblock %}
