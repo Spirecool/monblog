@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset Password Link{% endblock %}
+
+{% block navbar %} {% endblock %}
+
+{% block body %}
+    <div>
+        <div class="card p-4" style="width: 100%;">
+            <div class="card-body">
+                <h1 class="text-center mb-4">Hi!</h1>
+                <p>Pour réinitialiser votre mot-de-passe, veuillez cliquer sur le lien suivant:</p>
+
+                <div class="text-center">
+                    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}" class="btn btn-link">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+                </div>
+
+                <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+                <p class="text-center">Merci</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %} {% endblock %}
