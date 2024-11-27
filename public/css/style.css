@@ -29,3 +29,18 @@ html, body {
 .vich-image img {
     max-width: 350px;
 }
+
+/* Cards images  */
+
+.card-img {
+    object-fit: cover;
+    width: 100%;
+    height: 200px; /* Hauteur uniforme pour toutes les images */
+}
+
+/* Optionnel: Si vous voulez que les images soient de taille exacte (par exemple 300px x 200px), utilisez les règles suivantes */
+.card-img-top {
+    object-fit: cover;
+    height: 200px; /* Hauteur uniforme */
+    width: 100%;    /* Largeur de 100% pour que l'image prenne toute la largeur de la carte */
+}

@@ -1,6 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['bootstrap_3_layout.html.twig']
+    globals:
+        app_locale: '%kernel.default_locale%'  # Ajoutez cette ligne pour passer la locale à Twig
 
 when@test:
     twig:
