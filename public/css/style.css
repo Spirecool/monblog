@@ -18,9 +18,14 @@ html, body {
 }
 
 /* Le footer est positionné en bas grâce à flexbox */
-footer {
+/* footer {
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
-    margin-top: auto; /* Pousse le footer vers le bas */
+    margin-top: auto; /* Pousse le footer vers le bas 
+    }
+*/
+
+.vich-image img {
+    max-width: 350px;
 }
