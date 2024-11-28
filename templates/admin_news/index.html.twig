@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Toutes les News {% endblock %}
+
+{% block body %}
+    <h1> Toutes les News </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>ImageName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td>{{ news.id }}</td>
+                <td>{{ news.title }}</td>
+                <td>{{ news.description|slice(0, 50) }}</td>
+                <td>{{ news.imageName }}</td>
+                <td>
+                    <a href="{{ path('app_news_show', {'id': news.id}) }}" class="btn btn-primary"> Voir </a>
+                    <a href="{{ path('app_news_edit', {'id': news.id}) }}" class="btn btn-success"> Modifier </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7"> Aucun résultat trouvé </td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_news_new') }}"> Créer une nouvelle News </a>
+{% endblock %}

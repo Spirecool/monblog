@@ -1,47 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ news.title }} - Blog{% endblock %}
+{% block title %}
+	{{ news.title }}
+	- Blog
+{% endblock %}
 
 {% block body %}
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <!-- Titre de l'article -->
-                <h1 class="display-4 text-center mb-4">{{ news.title }}</h1>
+	<div class="container my-5">
+		<div class="row justify-content-center">
+			<div
+				class="col-md-8">
+				<!-- Titre de l'article -->
+				<h1 class="display-4 text-center mb-4">{{ news.title }}</h1>
 
-                <!-- Image de la news (si disponible) -->
-                {% if news.imageName %}
-                    <img src="{{ asset('images/' ~ news.imageName) }}" class="img-fluid rounded mb-4" alt="{{ news.title }}">
-                {% else %}
-                    <img src="https://via.placeholder.com/800x400.png?text=Image+Not+Available" class="img-fluid rounded mb-4" alt="Image Not Available">
-                {% endif %}
+				<!-- Image de la news (si disponible) -->
+				{% if news.imageName %}
+					<img src="{{ asset('images/' ~ news.imageName) }}" class="img-fluid rounded mb-4" alt="{{ news.title }}">
+				{% else %}
+					<img src="https://via.placeholder.com/800x400.png?text=Image+Not+Available" class="img-fluid rounded mb-4" alt="Image Not Available">
+				{% endif %}
 
-                <!-- Description de la news -->
-                <p class="lead">{{ news.description }}</p>
+				<!-- Description de la news -->
+				<p class="lead">{{ news.description }}</p>
 
-                <!-- Dates de publication -->
-                <div class="text-muted mb-4">
-                    <small>Publié le {{ news.createdAt|date('d F Y à H:i') }}</small>
-                    {% if news.updatedAt %}
-                        <small> | Dernière mise à jour le {{ news.updatedAt|date('d F Y à H:i') }}</small>
-                    {% endif %}
-                </div>
-                
+				<!-- Dates de publication -->
+				<div class="text-muted mb-4">
+					<small>Publié le
+						{{ news.createdAt|date('d F Y à H:i') }}</small>
+					{% if news.updatedAt %}
+						<small>
+							| Dernière mise à jour le
+							{{ news.updatedAt|date('d F Y à H:i') }}</small>
+					{% endif %}
+				</div>
 
-                <!-- Espacement -->
-                <hr>
+				<hr>
 
-                <!-- Bloc des boutons Modifier et Supprimer -->
-                <div class="d-flex justify-content-between mb-4">
-                    <a href="{{ path('app_news_edit', {'id': news.id}) }}" class="btn btn-success">Modifier cet article</a>
+				{% if  is_granted('ROLE_ADMIN') %}
+					<!-- Bloc des boutons Modifier et Supprimer -->
+					<div class="d-flex justify-content-between mb-4">
+						<a href="{{ path('app_news_edit', {'id': news.id}) }}" class="btn btn-success">Modifier cet article</a>
 
-                    <!-- Formulaire de suppression -->
-                    {{ include('news/_delete_form.html.twig') }}
-                </div>
-
-                <!-- Bouton de retour à la liste -->
-                <a href="{{ path('app_news_index') }}" class="btn btn-primary">Retour à la liste des articles</a>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+						<!-- Formulaire de suppression -->
+						{{ include('news/_delete_form.html.twig') }}
+					</div>
+				{% endif%}
+{% if  is_granted('ROLE_ADMIN') %}
+					<!-- Bouton de retour à la liste -->
+					<a href="{{ path('app_news_index') }}" class="btn btn-primary">Retour à la liste des articles</a>
+					{% endif  %}
+				</div>
+			</div>
+		</div>
+	{% endblock %}

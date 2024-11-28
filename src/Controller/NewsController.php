@@ -6,15 +6,16 @@ use App\Entity\News;
 use App\Form\NewsType;
 use App\Repository\NewsRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/news')]
 class NewsController extends AbstractController
 {
-    #[Route('/', name: 'app_news_index', methods: ['GET'])]
+    #[Route('/admin/', name: 'app_news_index', methods: ['GET'])]
     public function index(NewsRepository $newsRepository): Response
     {
         return $this->render('news/index.html.twig', [
@@ -22,7 +23,8 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_news_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/new', name: 'app_news_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $news = new News();
@@ -43,14 +45,15 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_news_show', methods: ['GET'])]
+    #[Route('admin/{id}', name: 'app_news_show', methods: ['GET'])]
     public function show(News $news): Response
     {
         return $this->render('news/show.html.twig', [
             'news' => $news,
         ]);
     }
-    #[Route('/{id}/edit', name: 'app_news_edit', methods: ['GET', 'POST'])]
+    #[Route('admin/{id}/edit', name: 'app_news_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, News $news, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(NewsType::class, $news);
@@ -72,7 +75,8 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_news_delete', methods: ['POST'])]
+    #[Route('admin/{id}', name: 'app_news_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, News $news, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Repository\NewsRepository;
@@ -12,8 +11,15 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(NewsRepository $newsRepository): Response
     {
-            return $this->render('home/index.html.twig', [
-            'news'=> $newsRepository->findAll(), // on récupère avec la méthode findAll() toutes les news
+        // Récupérer les 2 derniers articles, triés par date de création décroissante
+        $news = $newsRepository->findBy(
+            [],
+            ['createdAt' => 'DESC'],  // Trier par la date de création (ordre décroissant)
+            3                        // Limiter à 2 résultats
+        );
+
+        return $this->render('home/index.html.twig', [
+            'news' => $news,  // Passez les articles récupérés à la vue
         ]);
     }
 }
